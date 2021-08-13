@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Login } from 'src/app/models/login.model';
+import { HttpService } from 'src/app/servicos/http.service';
 import { LoginService } from 'src/app/servicos/login.service';
 
 @Component({
@@ -18,10 +19,14 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private loginService: LoginService,
-    private router: Router) {
+    private router: Router,
+    private httpService: HttpService) {
   }
 
   ngOnInit(): void {
+    if (this.httpService.autenticado()) {
+      this.router.navigate(['/']);
+    }
   }
 
   cadastrar() {
