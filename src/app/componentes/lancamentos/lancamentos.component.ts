@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lancamentos',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LancamentosComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  sair() {
+    delete localStorage['token'];
+    this.router.navigate(['/login']);
   }
 
 }
