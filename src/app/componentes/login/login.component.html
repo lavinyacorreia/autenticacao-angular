@@ -1,0 +1,48 @@
+<h1>Login <i class="bi bi-box-arrow-in-right"></i></h1> 
+<div class="formulario">
+  <form class="row g-3 mt-2 needs-validation" [formGroup]="form" novalidate>
+        <div class="mb-3">
+            <input
+            type="email"
+            id="email"
+            formControlName="email"
+            class="form-control"
+            [ngClass]="cssValidacao('email')"
+            placeholder="Digite seu e-mail"
+          />
+          <span *ngIf="emailErroMsg()" class="invalid-feedback">
+            <i class="bi-file-excel-fill"></i> 
+            Email é obrigatório.
+          </span>
+        </div>
+        <div class="mb-3">
+            <input
+            type="password"
+            id="senha"
+            formControlName="senha"
+            class="form-control"
+            [ngClass]="cssValidacao('senha')"
+            placeholder="Digite sua senha"
+          />
+          <span
+          class="invalid-feedback"
+          *ngIf="form.controls.senha.touched && form.controls.senha.errors?.required">
+          <i class="bi-file-excel-fill"></i> 
+          A senha é obrigatória.
+          </span>
+          <span
+            class="invalid-feedback"
+            *ngIf="form.controls.password.touched && form.controls.password.errors?.minlength"
+          >
+            A senha deve ter 6 caracteres.
+          </span>    
+            <div id="passwordHelpBlock" class="form-text">
+                Sua senha deve ter pelo menos 6 caracteres.
+            </div>
+        </div>
+
+        <button type="button"
+         class="btn btn-primary" (click)="cadastrar()" [disabled]="form.invalid">Entrar</button>
+        <button type="reset" class="btn btn-secondary">Limpar</button>
+    </form>
+</div>
