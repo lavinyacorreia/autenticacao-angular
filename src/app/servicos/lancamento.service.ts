@@ -15,17 +15,11 @@ export class LancamentoService {
   ) { }
 
   listarTodos(): Observable<any> {
-    const id = this.httpService.obterIdUsuario();
+    const id = this.httpService.obterIdUsuario();    
 
-
-    let httpHeaders = new HttpHeaders();
-    if (localStorage['token']){
-      httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + localStorage['token']);
-    }
-    
     return this.http.get(
       env.apiBaseUrl + 'api/lancamentos/funcionario/' + id,
-      { headers: httpHeaders}
+      this.httpService.headers()
     );
   }
 }
