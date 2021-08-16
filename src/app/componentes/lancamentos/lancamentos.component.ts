@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { LancamentoService } from 'src/app/servicos/lancamento.service';
 
 @Component({
   selector: 'app-lancamentos',
@@ -8,14 +8,10 @@ import { Router } from '@angular/router';
 })
 export class LancamentosComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private lancamentoService: LancamentoService) { }
 
   ngOnInit(): void {
-  }
-
-  sair() {
-    delete localStorage['token'];
-    this.router.navigate(['/login']);
+    this.lancamentoService.listarTodos().subscribe();
   }
 
 }

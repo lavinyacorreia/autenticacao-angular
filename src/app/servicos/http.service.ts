@@ -5,7 +5,13 @@ import { Injectable } from '@angular/core';
 })
 export class HttpService {
 
+  dadosUsuario = { id: '' };
+  
   constructor() { }
+
+  obterIdUsuario() {
+    return this.dadosUsuario.id;
+  }
 
   autenticado(): boolean {
   	if (!localStorage['token']) {
@@ -16,6 +22,7 @@ export class HttpService {
       if (!dadosUsuario) {
         return false;
       }
+      this.dadosUsuario = dadosUsuario;
     	return parseInt(dadosUsuario.id) > 0;
     } catch (error) {
       return false;
@@ -23,3 +30,4 @@ export class HttpService {
   }
 
 }
+
