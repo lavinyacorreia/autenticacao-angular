@@ -7,12 +7,18 @@ import { LoginComponent } from './componentes/login/login.component';
 import { LancamentosComponent } from './componentes/lancamentos/lancamentos.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { TipoPipe } from './filtros/tipo.pipe';
+import { HoraPipe } from './filtros/hora.pipe';
+import { DataPipe } from './filtros/data.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    LancamentosComponent
+    LancamentosComponent,
+    TipoPipe,
+    HoraPipe,
+    DataPipe
   ],
   imports: [
     BrowserModule,
