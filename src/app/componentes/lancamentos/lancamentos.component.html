@@ -1,11 +1,16 @@
 <div style="text-align: right">
-  <h3>Data e hora atual</h3>
-  <p>{{dataTempoReal}}</p>
+  <p>Data e hora atual: {{dataTempoReal}}</p>
   <p>Data e hora: {{ dataHoraAtual }}</p>
+  <p><button (click)="atualizarDataHora()">Atualizar data</button></p>
 </div>
-<p><button (click)="atualizarDataHora()">Atualizar data</button></p>
+<p>
+  <button (click)="downloadCSV()" type="button" class="btn btn-outline-primary">
+    Download CSV
+    <i class="bi-file-earmark-excel"></i>
+  </button>
+</p>
+<h2>Lista de lançamentos</h2>
 <table class="table caption-top">
-    <caption>Lista de lançamentos</caption>
     <thead>
       <tr class="table-primary">
         <th scope="col">ID</th>
