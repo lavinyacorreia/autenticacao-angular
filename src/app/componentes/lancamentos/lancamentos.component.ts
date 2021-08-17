@@ -12,16 +12,21 @@ import { LancamentoService } from 'src/app/servicos/lancamento.service';
 export class LancamentosComponent implements OnInit, OnDestroy {
 
   lancamentos: Lancamento[] = [];
+  
   dataHoraAtual = '';
   dataHoraAtualSub: Subscription | undefined;
+  
+  dataTempoReal = '';
+  dataTempoRealSub: Subscription | undefined;
 
   constructor(
     private lancamentoService: LancamentoService,
-    private dataHoraService: DataHoraService) { }
-
+    private dataHoraService: DataHoraService
+  ) { }
 
   ngOnDestroy(): void {
-     this.dataHoraAtualSub?.unsubscribe();
+    this.dataHoraAtualSub?.unsubscribe();
+    this.dataTempoRealSub?.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -29,8 +34,12 @@ export class LancamentosComponent implements OnInit, OnDestroy {
       dados => this.lancamentos = dados.data.content,
       () => alert('Erro obtendo lançamentos.')
     );
-    this.dataHoraService.dataHora.subscribe(
+    this.dataHoraAtualSub = this.dataHoraService.dataHora.subscribe(
       dataHora => this.dataHoraAtual = dataHora
+    );
+    
+    this.dataTempoRealSub = this.dataHoraService.dataHoraTempoReal.subscribe(
+      dataHora => this.dataTempoReal = dataHora
     );
   }
 
@@ -38,7 +47,8 @@ export class LancamentosComponent implements OnInit, OnDestroy {
     return "https://www.google.com/maps/search/?api=1&query=" + localizacao;
   }
 
-  atualizarDataHora(){
+  atualizarDataHora() {
     this.dataHoraService.atualizarDataHora();
   }
+
 }
