@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Lancamento } from 'src/app/models/lancamento.model';
 import { DataHoraService } from 'src/app/servicos/data-hora.service';
 import { LancamentoService } from 'src/app/servicos/lancamento.service';
@@ -8,14 +9,20 @@ import { LancamentoService } from 'src/app/servicos/lancamento.service';
   templateUrl: './lancamentos.component.html',
   styleUrls: ['./lancamentos.component.css']
 })
-export class LancamentosComponent implements OnInit {
+export class LancamentosComponent implements OnInit, OnDestroy {
 
   lancamentos: Lancamento[] = [];
   dataHoraAtual = '';
+  dataHoraAtualSub: Subscription | undefined;
 
   constructor(
     private lancamentoService: LancamentoService,
     private dataHoraService: DataHoraService) { }
+
+
+  ngOnDestroy(): void {
+     this.dataHoraAtualSub?.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.lancamentoService.listarTodos().subscribe(
@@ -29,5 +36,9 @@ export class LancamentosComponent implements OnInit {
 
   urlLocalizacao(localizacao: string) {
     return "https://www.google.com/maps/search/?api=1&query=" + localizacao;
+  }
+
+  atualizarDataHora(){
+    this.dataHoraService.atualizarDataHora();
   }
 }

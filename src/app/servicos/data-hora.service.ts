@@ -16,6 +16,6 @@ export class DataHoraService {
   }
 
   atualizarDataHora(){
-    this.dataHora.next(this.obterDataHoraAtual())
+    this.dataHora.next(this.obterDataHoraAtual());
   }
 }
