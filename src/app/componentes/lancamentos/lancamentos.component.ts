@@ -4,6 +4,7 @@ import { Lancamento } from 'src/app/models/lancamento.model';
 import { DataHoraService } from 'src/app/servicos/data-hora.service';
 import { LancamentoService } from 'src/app/servicos/lancamento.service';
 
+
 @Component({
   selector: 'app-lancamentos',
   templateUrl: './lancamentos.component.html',
@@ -49,6 +50,14 @@ export class LancamentosComponent implements OnInit, OnDestroy {
 
   atualizarDataHora() {
     this.dataHoraService.atualizarDataHora();
+  }
+
+  downloadCSV() {
+    this.lancamentoService.downloadCSV(this.lancamentos);
+  }
+
+  downloadPDF(){
+    this.lancamentoService.downloadPDF(this.lancamentos);
   }
 
 }
